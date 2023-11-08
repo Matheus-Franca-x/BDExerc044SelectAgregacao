@@ -4,23 +4,23 @@ USE locadora4
 GO
 CREATE TABLE estrela
 (
-	id_estrela				INT				NOT NULL,
-	nome					VARCHAR(50)		NOT NULL
+	id_estrela				INT		NOT NULL,
+	nome					VARCHAR(50)	NOT NULL
 	PRIMARY KEY(id_estrela)
 )
 GO
 CREATE TABLE filme
 (
-	id_filme				INT				NOT NULL,
-	titulo					VARCHAR(40)		NOT NULL,
-	ano						INT				NULL	 CHECK(ano <= 2021)
+	id_filme				INT		NOT NULL,
+	titulo					VARCHAR(40)	NOT NULL,
+	ano					INT		NULL	 CHECK(ano <= 2021)
 	PRIMARY KEY(id_filme)
 )
 GO
 CREATE TABLE filme_estrela
 (
-	id_filme				INT				NOT NULL,
-	id_estrela				INT				NOT NULL
+	id_filme				INT		NOT NULL,
+	id_estrela				INT		NOT NULL
 	PRIMARY KEY(id_filme, id_estrela)
 	FOREIGN KEY(id_filme) REFERENCES filme(id_filme),
 	FOREIGN KEY(id_estrela) REFERENCES estrela(id_estrela)
@@ -28,27 +28,27 @@ CREATE TABLE filme_estrela
 GO
 CREATE TABLE cliente
 (
-	num_cad_cliente			INT				NOT NULL,
-	nome					VARCHAR(70)		NOT NULL,
-	logradouro_end			VARCHAR(150)	NOT NULL,
-	num_end					INT				NOT NULL CHECK(num_end >= 0),
-	cep_end					CHAR(8)			NULL	 CHECK(LEN(cep_end) = 8)
+	num_cad_cliente				INT		NOT NULL,
+	nome					VARCHAR(70)	NOT NULL,
+	logradouro_end				VARCHAR(150)	NOT NULL,
+	num_end					INT		NOT NULL CHECK(num_end >= 0),
+	cep_end					CHAR(8)		NULL	 CHECK(LEN(cep_end) = 8)
 	PRIMARY KEY(num_cad_cliente)
 )
 GO
 CREATE TABLE dvd
 (
-	num_dvd					INT				NOT NULL,
-	data_fabr				DATE			NOT NULL CHECK(data_fabr < GETDATE()),
-	id_filme				INT				NOT NULL
+	num_dvd					INT		NOT NULL,
+	data_fabr				DATE		NOT NULL CHECK(data_fabr < GETDATE()),
+	id_filme				INT		NOT NULL
 	PRIMARY KEY(num_dvd)
 	FOREIGN KEY(id_filme) REFERENCES filme(id_filme)
 )
 GO
 CREATE TABLE locacao
 (
-	num_dvd					INT				NOT NULL,
-	num_cad_cliente			INT				NOT NULL,
+	num_dvd				INT			NOT NULL,
+	num_cad_cliente			INT			NOT NULL,
 	data_locacao			DATE			NOT NULL DEFAULT GETDATE(),
 	data_devolucao			DATE			NOT NULL,
 	valor					DECIMAL(7, 2)	NOT NULL CHECK(valor >= 0)
