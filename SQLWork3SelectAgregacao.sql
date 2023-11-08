@@ -8,28 +8,28 @@ USE work_user4
 GO
 CREATE TABLE projects
 (
-	id_projects			INT	IDENTITY(10001, 1)	NOT NULL,
-	name				VARCHAR(45)				NOT NULL,
-	description			VARCHAR(45)				NULL,
-	date_proj			DATE					NOT NULL CHECK(date_proj < GETDATE()) 
+	id_projects			INT IDENTITY(10001, 1)	NOT NULL,
+	name				VARCHAR(45)		NOT NULL,
+	description			VARCHAR(45)		NULL,
+	date_proj			DATE			NOT NULL CHECK(date_proj < GETDATE()) 
 	PRIMARY KEY (id_projects)
 )
 GO
 CREATE TABLE users
 (
-	id_users			INT	IDENTITY(1, 1)		NOT NULL,
-	name				VARCHAR(45)				NOT NULL,
-	username			VARCHAR(45)				NOT NULL,
-	password			VARCHAR(45)				NOT NULL DEFAULT('123mudar'),
-	email				VARCHAR(45)				NOT NULL
+	id_users			INT IDENTITY(1, 1)	NOT NULL,
+	name				VARCHAR(45)		NOT NULL,
+	username			VARCHAR(45)		NOT NULL,
+	password			VARCHAR(45)		NOT NULL DEFAULT('123mudar'),
+	email				VARCHAR(45)		NOT NULL
 	PRIMARY KEY (id_users),
 	CONSTRAINT UQ_username UNIQUE (username)
 )
 GO
 CREATE TABLE users_has_projects
 (
-	id_users			INT						NOT NULL,
-	id_projects			INT						NOT NULL
+	id_users			INT			NOT NULL,
+	id_projects			INT			NOT NULL
 	PRIMARY KEY(id_users, id_projects)
 	FOREIGN KEY(id_users) REFERENCES users(id_users),
 	FOREIGN KEY(id_projects) REFERENCES projects(id_projects)
